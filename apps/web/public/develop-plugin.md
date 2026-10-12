@@ -383,7 +383,7 @@ broader ecosystem, but topic membership alone does not submit or list a plugin.
 - [ ] Target repository instructions and target DSH version are recorded.
 - [ ] Host, Web UI, or Host + Web UI ownership is explicit.
 - [ ] The extension point was inspected in the target version; no service or slot name was guessed.
-- [ ] The Git root package declares a safe, existing `dsh.bundle.patch` file.
+- [ ] The Git root package declares a safe, existing `dsh.bundle.patch` file, or a bounded array of such files.
 - [ ] Patch rows resolve installed package names and use stable IDs.
 - [ ] Host and optional client exports point to committed build artifacts.
 - [ ] External dependencies contain no `workspace:` ranges.

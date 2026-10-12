@@ -86,7 +86,7 @@ describe('GitHub Topic GraphQL client', () => {
           client: { byteSize: 20, oid: '3'.repeat(40) },
           license: { byteSize: 11, oid: '4'.repeat(40) },
           licenseMd: null,
-          patch: { byteSize: 20, oid: '5'.repeat(40), text: '- name: plugin\n' },
+          patch0: { byteSize: 20, oid: '5'.repeat(40), text: '- name: plugin\n' },
           readme: { byteSize: 20, oid: '6'.repeat(40), text: '# Plugin' },
           readmeZh: null,
           readmeZhCn: { byteSize: 20, oid: '7'.repeat(40), text: '# 插件' },
@@ -142,15 +142,69 @@ describe('GitHub Topic GraphQL client', () => {
       client: { oid: '3'.repeat(40) },
       license: { path: 'LICENSE' },
       patch: { text: '- name: plugin\n' },
+      patches: [{ text: '- name: plugin\n' }],
       readme: { path: 'README.md', text: '# Plugin' },
       readmeZh: { path: 'README.zh-CN.md', text: '# 插件' },
       runtime: { oid: '8'.repeat(40) },
     });
     expect(calls[3].variables).toMatchObject({
       client0: `${'1'.repeat(40)}:lib/client.js`,
-      patch0: `${'1'.repeat(40)}:cordis.patch.yml`,
+      patch0_0: `${'1'.repeat(40)}:cordis.patch.yml`,
       runtime0: `${'1'.repeat(40)}:lib/index.js`,
     });
+  });
+
+  it('inspects every declared patch path in a multi-patch contract', async () => {
+    const calls: Array<{ query: string; variables: Record<string, unknown> }> = [];
+    const client = createGitHubTopicClient({
+      fetch: async (_input, init) => {
+        const body = JSON.parse(String(init?.body));
+        calls.push(body);
+        return response({
+          r0: {
+            license: { byteSize: 11, oid: '4'.repeat(40) },
+            licenseMd: null,
+            patch0: { byteSize: 20, oid: '5'.repeat(40), text: '- name: plugin\n' },
+            patch1: { byteSize: 24, oid: '6'.repeat(40), text: '- name: presets\n' },
+            readme: { byteSize: 20, oid: '7'.repeat(40), text: '# Plugin' },
+            readmeZh: null,
+            readmeZhCn: null,
+            runtime: { byteSize: 20, oid: '8'.repeat(40) },
+          },
+          rateLimit: { cost: 1, remaining: 996, resetAt: '2026-08-14T02:00:00Z' },
+        });
+      },
+      now: () => new Date('2026-08-14T00:30:00Z'),
+      sleep: async () => {},
+      token: 'test-token',
+    });
+
+    const inspected = await client.inspectBundles([
+      {
+        contract: {
+          client: { descriptor: false },
+          patchPath: 'cordis.patch.yml',
+          patchPaths: ['cordis.patch.yml', 'presets/cordis.patch.yml'],
+          runtimePath: 'lib/index.js',
+        },
+        repository: {
+          commit: '1'.repeat(40),
+          nameWithOwner: 'example/one',
+          repository: 'https://github.com/example/one',
+        },
+      },
+    ]);
+
+    expect(inspected.get('https://github.com/example/one')).toMatchObject({
+      patch: { text: '- name: plugin\n' },
+      patches: [{ text: '- name: plugin\n' }, { text: '- name: presets\n' }],
+    });
+    expect(calls[0].variables).toMatchObject({
+      patch0_0: `${'1'.repeat(40)}:cordis.patch.yml`,
+      patch0_1: `${'1'.repeat(40)}:presets/cordis.patch.yml`,
+    });
+    expect(calls[0].query).toContain('patch0: object(expression: $patch0_0)');
+    expect(calls[0].query).toContain('patch1: object(expression: $patch0_1)');
   });
 
   it('marks an empty drifting Topic pass as incomplete', async () => {

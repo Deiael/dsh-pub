@@ -1,5 +1,6 @@
 import { parseDocument } from 'yaml';
 
+import { catalogBundlePatchPath, normalizeBundlePatchPaths } from './bundle-patch.mjs';
 import {
   PUBLISHER_DELISTED,
   createExcludedRepositorySet,
@@ -105,10 +106,12 @@ const manifestContract = (repository) => {
   if (typeof manifest !== 'object' || manifest === null || Array.isArray(manifest)) {
     reject('invalid_manifest', 'Root package.json must contain a JSON object.');
   }
-  const patch = manifest.dsh?.bundle?.patch;
-  if (typeof patch !== 'string' || !patch.trim()) {
-    reject('missing_bundle_manifest', 'Root package.json does not declare dsh.bundle.patch.');
-  }
+  const patchPaths = normalizeBundlePatchPaths(manifest.dsh?.bundle?.patch, {
+    missingCode: 'missing_bundle_manifest',
+    missingMessage: 'Root package.json does not declare dsh.bundle.patch.',
+    normalizePath,
+    reject,
+  });
   const name = typeof manifest.name === 'string' ? manifest.name.trim() : '';
   const version = typeof manifest.version === 'string' ? manifest.version.trim() : '';
   const license = typeof manifest.license === 'string' ? manifest.license.trim() : '';
@@ -143,7 +146,8 @@ const manifestContract = (repository) => {
     license,
     manifest,
     name,
-    patchPath: normalizePath(patch),
+    patchPath: patchPaths[0],
+    patchPaths,
     runtimePath: normalizePath(runtime),
     version,
   };
@@ -271,8 +275,12 @@ const statement = {
   zh: '通过 GitHub dsh-plugin Topic 自动发现。静态检查在不执行第三方代码的前提下，验证了固定公开版本的根目录 bundle 契约与已提交文件；这不等于人工审核、安全审计、运行时冒烟测试、发布者身份验证或官方背书。',
 };
 
+const patchBlobs = (files) => (Array.isArray(files.patches) ? files.patches : [files.patch]);
+
 const automatedEntry = ({ contract, files, repository }, entries, analyzedAt, reservedSlugs) => {
-  assertPatch(files.patch);
+  for (const blob of patchBlobs(files)) {
+    assertPatch(blob);
+  }
   assertBlob(files.runtime, 'missing_runtime', 'The declared runtime entry is not committed.');
   if (contract.client.entryPath) {
     assertBlob(files.client, 'invalid_client', 'The declared client entry is not committed.');
@@ -363,7 +371,7 @@ const sourceRecord = ({ contract, files, repository }, analyzedAt) => ({
   directory: '',
   packageName: contract.name,
   manifestPath: 'package.json',
-  bundlePatchPath: contract.patchPath,
+  bundlePatchPath: catalogBundlePatchPath(contract.patchPaths ?? [contract.patchPath]),
   runtimeEntryPath: contract.runtimePath,
   ...(contract.client.entryPath ? { clientEntryPath: contract.client.entryPath } : {}),
   readmePath: 'README.md',

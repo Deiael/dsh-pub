@@ -401,6 +401,89 @@ describe('GitHub pull request plugin integration', () => {
     ).rejects.toMatchObject({ code: 'publisher_delisted' });
   });
 
+  const fetchWithPatch = (
+    patch: unknown,
+    extraFiles: Record<string, string> = {},
+  ): typeof fetch => {
+    const nextManifest = JSON.stringify({
+      ...JSON.parse(manifest),
+      dsh: { bundle: { patch }, client: 'lib/client.js' },
+    });
+    return async (input, init) => {
+      const url = new URL(String(input));
+      if (url.pathname === `/repos/example/dsh-clock/git/trees/${'b'.repeat(40)}`) {
+        const response = await fetchGitHub(input, init);
+        const tree = (await response.json()) as {
+          tree: Array<{ mode: string; path: string; type: string }>;
+        };
+        const known = new Set(tree.tree.map((entry) => entry.path));
+        for (const path of Object.keys(extraFiles)) {
+          if (!known.has(path)) {
+            tree.tree.push({ mode: '100644', path, type: 'blob' });
+          }
+        }
+        return githubResponse(tree);
+      }
+      if (url.pathname.endsWith('/contents/package.json')) {
+        return fileResponse(nextManifest);
+      }
+      const contentPath = decodeURIComponent(
+        url.pathname.replace('/repos/example/dsh-clock/contents/', ''),
+      );
+      if (contentPath in extraFiles) return fileResponse(extraFiles[contentPath]);
+      return fetchGitHub(input, init);
+    };
+  };
+
+  it('accepts a bounded array of committed patch paths', async () => {
+    const update = await createSubmissionUpdate(
+      submissionUpdateInput(
+        fetchWithPatch(['./cordis.patch.yml', './presets/cordis.patch.yml'], {
+          'presets/cordis.patch.yml': '- name: dsh-clock-presets\n  config: {}\n',
+        }),
+      ),
+    );
+
+    expect(update.changed).toBe(true);
+    expect(update.communitySources.entries[0]).toMatchObject({
+      bundlePatchPath: ['cordis.patch.yml', 'presets/cordis.patch.yml'],
+    });
+  });
+
+  it('keeps a one-entry patch array as a string in catalog sources', async () => {
+    const update = await createSubmissionUpdate(
+      submissionUpdateInput(fetchWithPatch(['./cordis.patch.yml'])),
+    );
+
+    expect(update.communitySources.entries[0].bundlePatchPath).toBe('cordis.patch.yml');
+  });
+
+  it.each([
+    ['an empty array', [], 'non-empty array'],
+    [
+      'a too-long array',
+      Array.from({ length: 9 }, (_, index) => `patch-${index}.yml`),
+      'at most 8 paths',
+    ],
+    ['duplicate paths', ['./cordis.patch.yml', 'cordis.patch.yml'], 'duplicate paths'],
+    ['a bad path inside the array', ['./cordis.patch.yml', '../outside.yml'], 'safe relative'],
+  ])('rejects %s', async (_label, patch, expected) => {
+    await expect(
+      createSubmissionUpdate(submissionUpdateInput(fetchWithPatch(patch))),
+    ).rejects.toThrow(expected);
+  });
+
+  it('rejects a missing file declared in a patch array', async () => {
+    await expect(
+      createSubmissionUpdate(
+        submissionUpdateInput(fetchWithPatch(['./cordis.patch.yml', './presets/cordis.patch.yml'])),
+      ),
+    ).rejects.toMatchObject({
+      code: 'missing_file',
+      message: 'Required source file is missing: presets/cordis.patch.yml.',
+    });
+  });
+
   it('rejects unbounded package metadata', async () => {
     const oversizedManifest = JSON.stringify({
       ...JSON.parse(manifest),
