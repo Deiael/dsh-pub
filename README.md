@@ -197,11 +197,13 @@ browser. CI installs the same Chromium revision with its required OS dependencie
 
 ## Cloudflare deployment
 
-The Worker serves `apps/web/dist` as static assets and runs first only for `/` and `/api/*`. Plugin
-source and documentation stay in GitHub. D1 stores install event counters and submission job state;
-it never stores the GitHub App private key, installation tokens, or Workflow step credentials.
-Production Workers Builds watches every path on `dsh-pub/dsh-pub` `main`, runs `npm run build`, and
-deploys the static assets, HTTP API, D1 binding, and `PluginSubmissionWorkflow` in one Worker.
+The Worker serves `apps/web/dist` as static assets and runs first for `/`, `/api/*`, and plugin
+detail routes. Plugin source and documentation stay in GitHub. D1 stores install event counters and
+submission job state; it never stores the GitHub App private key, installation tokens, or Workflow
+step credentials. Production Workers Builds watches every path on `dsh-pub/dsh-pub` `main`, runs
+`npm run build`, then `wrangler deploy` (which packs `community-automated` detail HTML into shard
+files so the upload stays inside the 20,000-file Workers Free limit). The same Worker publishes the
+static assets, HTTP API, D1 binding, and `PluginSubmissionWorkflow`.
 
 Runtime bindings required by plugin submission are:
 

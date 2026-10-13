@@ -1,4 +1,5 @@
 import installableRegistry from './installable-slugs.generated.json' with { type: 'json' };
+import { servePluginDetailPage } from './plugin-pages.js';
 import { PluginSearchQueryError, runPluginSearch } from './plugin-search.js';
 
 const CLI_REPORTED_METRIC = 'CLI-reported completed installs';
@@ -597,6 +598,9 @@ export const handleRequest = async (
     const locale = preferredLocale(request.headers.get('Accept-Language'));
     return Response.redirect(new URL(`/${locale}/`, url), 302);
   }
+
+  const pluginPage = await servePluginDetailPage(request, env.ASSETS);
+  if (pluginPage) return pluginPage;
 
   if (!url.pathname.startsWith('/api/')) return env.ASSETS.fetch(request);
 

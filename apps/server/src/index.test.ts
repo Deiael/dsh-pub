@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import { buildPluginSearchIndex } from '@dsh-pub/catalog/plugin-search';
 
@@ -9,6 +9,8 @@ import {
   type D1ResultLike,
   type WorkerBindings,
 } from './index.js';
+import { packedPluginPageAssetPath, pluginPageShardIndex } from './plugin-page-shards.js';
+import { clearPackedPluginPageCache } from './plugin-pages.js';
 
 interface StoredEvent {
   completion_id: string | null;
@@ -811,5 +813,33 @@ describe('plugin search endpoint', () => {
       returned: 1,
       total: 1,
     });
+  });
+});
+
+describe('packed plugin detail fallback', () => {
+  afterEach(() => {
+    clearPackedPluginPageCache();
+  });
+
+  it('serves a packed automated page through the Worker fetch handler', async () => {
+    const slug = 'open-sea-skin';
+    const shardPath = packedPluginPageAssetPath('zh', pluginPageShardIndex(slug));
+    const { env } = createEnv();
+    env.ASSETS = {
+      fetch: async (request) => {
+        const path = new URL(request.url).pathname;
+        if (path === shardPath) {
+          return Response.json({ [slug]: '<meta name="robots" content="noindex">' });
+        }
+        return new Response('not found', { status: 404 });
+      },
+    };
+
+    const response = await handleRequest(
+      new Request('https://dsh.pub/zh/plugins/open-sea-skin/'),
+      env,
+    );
+    expect(response.status).toBe(200);
+    await expect(response.text()).resolves.toContain('noindex');
   });
 });

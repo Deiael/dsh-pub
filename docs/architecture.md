@@ -36,7 +36,14 @@ flowchart LR
   `settings.section`, and has an empty Host `apply`; browsing performs no network fetch and loads no
   third-party package.
 - Astro owns SEO-friendly English and Chinese pages; catalog filtering uses small client scripts.
-- The Worker runs before static assets only for `/`, `/api/*`, and explicitly configured routes.
+- Cloudflare Workers Free allows 20,000 static files per version (Paid: 100,000) and 25 MiB per
+  file. Bilingual plugin detail HTML crossed 20,000 pages at 9,819 community entries (commit
+  `a5c775`). The production deploy still prerenders every detail URL, then packs
+  `community-automated` HTML into `/_plugin-pages/{locale}/*.json` shards so the uploaded asset
+  count stays inside the Free limit. Official, reviewed, and submitted pages remain individual
+  files; the Worker reconstructs packed URLs. `wrangler.jsonc` `build.command` runs the pack step
+  before every `wrangler deploy`.
+- The Worker runs before static assets for `/`, `/api/*`, and `/en|zh/plugins/*`.
 - D1 stores install event state, aggregate counters, and the public operational state of plugin
   submissions. It does not store plugin code, submitter identities, GitHub App private keys, or
   installation tokens.
