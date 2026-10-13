@@ -96,48 +96,72 @@ describe('Harness catalog snapshot', () => {
 
   it('keeps the community collection separate, pinned, and source-contract reviewed', () => {
     expect(communityCatalog.entries).toHaveLength(communitySources.entries.length);
-    expect(communityCatalog.totals).toEqual({
-      reviewed: communityCatalog.entries.filter(
-        (entry) => entry.provenance?.status === 'community-reviewed',
-      ).length,
-      submitted: communityCatalog.entries.filter(
-        (entry) => entry.provenance?.status === 'community-submitted',
-      ).length,
-      automated: communityCatalog.entries.filter(
-        (entry) => entry.provenance?.status === 'community-automated',
-      ).length,
-      installable: communityCatalog.entries.filter((entry) => entry.distribution.installable)
-        .length,
-    });
+
+    const sourceByCoordinate = new Map<string, (typeof communitySources.entries)[number]>();
+    for (const source of communitySources.entries) {
+      const key = `${source.repository}\0${source.directory}`;
+      if (!sourceByCoordinate.has(key)) sourceByCoordinate.set(key, source);
+    }
 
     const officialSlugs = new Set(catalog.entries.map((entry) => entry.slug));
     const communitySlugs = new Set<string>();
+    const metricSlugs = new Set<string>();
+    const violations: string[] = [];
+    const totals = { reviewed: 0, submitted: 0, automated: 0, installable: 0 };
 
     for (const entry of communityCatalog.entries) {
-      const source = communitySources.entries.find(
-        (candidate) =>
-          candidate.repository === entry.source.repository &&
-          candidate.directory === entry.source.directory,
+      const source = sourceByCoordinate.get(
+        `${entry.source.repository}\0${entry.source.directory}`,
       );
-      expect(source).toBeDefined();
-      expect(entry.source.commit).toMatch(/^[a-f0-9]{40}$/);
-      expect(entry.source.commit).toBe(source?.commit);
-      expect(entry.source.directory).toBe(source?.directory);
-      expect(entry.name).toBe(source?.packageName);
-      expect(['community-reviewed', 'community-submitted', 'community-automated']).toContain(
-        entry.provenance?.status,
-      );
-      expect(entry.provenance?.statement.en).toContain('security audit');
-      expect(entry.provenance?.statement.zh).toContain('安全审计');
-      expect(entry.distribution).toMatchObject({
-        installable: true,
-        mode: 'git-bundle',
-        activation: 'profile-layer',
-      });
-      expect(officialSlugs.has(entry.slug)).toBe(false);
-      expect(communitySlugs.has(entry.slug)).toBe(false);
+      if (!source) {
+        violations.push(`${entry.slug}: missing pinned source`);
+        continue;
+      }
+      if (!/^[a-f0-9]{40}$/.test(entry.source.commit)) {
+        violations.push(`${entry.slug}: commit is not a 40-character SHA`);
+      }
+      if (entry.source.commit !== source.commit) {
+        violations.push(`${entry.slug}: commit does not match source pin`);
+      }
+      if (entry.source.directory !== source.directory) {
+        violations.push(`${entry.slug}: directory does not match source pin`);
+      }
+      if (entry.name !== source.packageName) {
+        violations.push(`${entry.slug}: package name does not match source pin`);
+      }
+      const status = entry.provenance?.status;
+      if (status === 'community-reviewed') totals.reviewed += 1;
+      else if (status === 'community-submitted') totals.submitted += 1;
+      else if (status === 'community-automated') totals.automated += 1;
+      else violations.push(`${entry.slug}: provenance status ${String(status)}`);
+      if (!entry.provenance?.statement.en.includes('security audit')) {
+        violations.push(`${entry.slug}: English provenance omits security audit`);
+      }
+      if (!entry.provenance?.statement.zh.includes('安全审计')) {
+        violations.push(`${entry.slug}: Chinese provenance omits 安全审计`);
+      }
+      if (
+        entry.distribution.installable !== true ||
+        entry.distribution.mode !== 'git-bundle' ||
+        entry.distribution.activation !== 'profile-layer'
+      ) {
+        violations.push(`${entry.slug}: distribution is not an installable git bundle`);
+      } else {
+        totals.installable += 1;
+      }
+      if (officialSlugs.has(entry.slug)) {
+        violations.push(`${entry.slug}: collides with an official catalog slug`);
+      }
+      if (communitySlugs.has(entry.slug)) {
+        violations.push(`${entry.slug}: duplicate community slug`);
+      }
       communitySlugs.add(entry.slug);
+      metricSlugs.add(installMetricSlug(entry.source.repository, entry.source.directory));
     }
+
+    expect(violations).toEqual([]);
+    expect(communityCatalog.totals).toEqual(totals);
+    expect(metricSlugs).toEqual(new Set(installableRegistry.slugs));
 
     expect(getCatalogEntry('dsh-genui')?.source.repository).toBe(
       'https://github.com/omdsh-dev/dsh-genui',
@@ -167,11 +191,6 @@ describe('Harness catalog snapshot', () => {
         { slot: 'conversation.view', id: 'automation', component: 'AutomationView' },
       ],
     });
-    expect(
-      communityCatalog.entries
-        .map((entry) => installMetricSlug(entry.source.repository, entry.source.directory))
-        .sort(),
-    ).toEqual([...installableRegistry.slugs].sort());
   });
 
   it('keeps publisher-delisted repositories out of generated catalog surfaces', () => {
