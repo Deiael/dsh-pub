@@ -525,4 +525,131 @@ describe('GitHub Topic catalog sync', () => {
       }),
     );
   });
+
+  const emptyCatalog = {
+    entries: [],
+    source: {
+      generatedAt: '2026-08-13T00:00:00.000Z',
+      policy: 'automated-pinned-source-contracts',
+      repository: 'https://github.com/topics/dsh-plugin',
+    },
+    totals: { installable: 0, reviewed: 0, submitted: 0 },
+  };
+  const emptySources = {
+    entries: [],
+    intake: 'https://dsh.pub/en/submit/',
+    policy: {},
+    reviewedAt: '2026-08-14',
+    schemaVersion: 2,
+    topic: 'dsh-plugin',
+  };
+  const inspectedClock = {
+    client: { byteSize: 20, oid: '4'.repeat(40) },
+    license: { byteSize: 11, oid: '5'.repeat(40) },
+    patch: {
+      byteSize: 28,
+      oid: '6'.repeat(40),
+      text: '- name: dsh-clock\n  config: {}\n',
+    },
+    readme: {
+      byteSize: 32,
+      oid: '7'.repeat(40),
+      text: '# dsh-clock\n\nAdds a clock panel.',
+    },
+    readmeZh: null,
+    runtime: { byteSize: 20, oid: '8'.repeat(40) },
+  };
+
+  const syncManifest = async (manifest: string, files = inspectedClock) =>
+    syncTopicCatalogData({
+      analysis: { entries: [], schemaVersion: 1, topic: 'dsh-plugin', totals: {} },
+      catalog: emptyCatalog,
+      github: {
+        discoverTopic: async () => ({
+          repositories: [
+            {
+              archived: false,
+              commit: '2'.repeat(40),
+              description: 'Adds a clock panel to DeepSeek Harness.',
+              manifest,
+              nameWithOwner: 'example/dsh-clock',
+              repository: 'https://github.com/example/dsh-clock',
+              updatedAt: '2026-08-14T00:30:00Z',
+            },
+          ],
+          snapshotAt: '2026-08-14T00:30:00.000Z',
+          totalCount: 1,
+        }),
+        inspectBundles: async () => new Map([['https://github.com/example/dsh-clock', files]]),
+      },
+      now: new Date('2026-08-14T01:00:00+08:00'),
+      registry: { generatedFrom: 'packages/catalog/src/community.generated.json', slugs: [] },
+      sources: emptySources,
+      topic: 'dsh-plugin',
+    });
+
+  const patchManifest = (patch: unknown) => {
+    const value = JSON.parse(validManifest) as {
+      dsh: { bundle: { patch: unknown }; client: unknown };
+    };
+    value.dsh.bundle.patch = patch;
+    return JSON.stringify(value);
+  };
+
+  it('lists a repository whose manifest declares a bounded patch array', async () => {
+    const result = await syncManifest(
+      patchManifest(['./cordis.patch.yml', './presets/cordis.patch.yml']),
+      {
+        ...inspectedClock,
+        patches: [
+          inspectedClock.patch,
+          {
+            byteSize: 36,
+            oid: '9'.repeat(40),
+            text: '- name: dsh-clock-presets\n  config: {}\n',
+          },
+        ],
+      },
+    );
+
+    expect(result.catalog.entries).toHaveLength(1);
+    expect(result.sources.entries[0]).toMatchObject({
+      bundlePatchPath: ['cordis.patch.yml', 'presets/cordis.patch.yml'],
+    });
+  });
+
+  it.each([
+    ['an empty array', [], 'non-empty array'],
+    [
+      'a too-long array',
+      Array.from({ length: 9 }, (_, index) => `patch-${index}.yml`),
+      'at most 8 paths',
+    ],
+    ['duplicate paths', ['./cordis.patch.yml', 'cordis.patch.yml'], 'duplicate paths'],
+    [
+      'a bad path inside the array',
+      ['./cordis.patch.yml', '../outside.yml'],
+      'safe repository-relative',
+    ],
+  ])('rejects %s during topic analysis', async (_label, patch, expected) => {
+    const result = await syncManifest(patchManifest(patch));
+    expect(result.catalog.entries).toEqual([]);
+    expect(result.analysis.entries[0]).toMatchObject({
+      repository: 'https://github.com/example/dsh-clock',
+      status: 'rejected',
+    });
+    expect(result.analysis.entries[0].message).toContain(expected);
+  });
+
+  it('rejects a missing file declared in a patch array', async () => {
+    const result = await syncManifest(
+      patchManifest(['./cordis.patch.yml', './presets/cordis.patch.yml']),
+      { ...inspectedClock, patches: [inspectedClock.patch, null] },
+    );
+    expect(result.catalog.entries).toEqual([]);
+    expect(result.analysis.entries[0]).toMatchObject({
+      code: 'invalid_patch',
+      status: 'rejected',
+    });
+  });
 });

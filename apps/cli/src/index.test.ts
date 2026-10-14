@@ -181,6 +181,61 @@ describe('installable target validation', () => {
     await expect(assertInstallableTarget(directory)).rejects.toThrow(expected);
   });
 
+  it('accepts a bounded array of committed patch files', async () => {
+    const directory = await createTemporaryDirectory();
+    await mkdir(join(directory, 'presets'));
+    await writeFile(
+      join(directory, 'package.json'),
+      JSON.stringify({
+        dsh: { bundle: { patch: ['./cordis.patch.yml', './presets/cordis.patch.yml'] } },
+      }),
+    );
+    await writeFile(join(directory, 'cordis.patch.yml'), '- id: test-bundle\n  config: {}\n');
+    await writeFile(
+      join(directory, 'presets/cordis.patch.yml'),
+      '- id: test-presets\n  config: {}\n',
+    );
+
+    await expect(assertInstallableTarget(directory)).resolves.toBeUndefined();
+  });
+
+  it.each([
+    ['an empty array', [], 'non-empty array'],
+    [
+      'a too-long array',
+      Array.from({ length: 9 }, (_, index) => `patch-${index}.yml`),
+      'at most 8 paths',
+    ],
+    ['duplicate paths', ['./cordis.patch.yml', 'cordis.patch.yml'], 'duplicate paths'],
+    [
+      'a bad path inside the array',
+      ['./cordis.patch.yml', '../outside.yml'],
+      'inside the install target',
+    ],
+  ])('rejects %s', async (_label, patch, expected) => {
+    const directory = await createTemporaryDirectory();
+    await writeFile(
+      join(directory, 'package.json'),
+      JSON.stringify({ dsh: { bundle: { patch } } }),
+    );
+    await writeFile(join(directory, 'cordis.patch.yml'), '- id: test-bundle\n  config: {}\n');
+
+    await expect(assertInstallableTarget(directory)).rejects.toThrow(expected);
+  });
+
+  it('rejects a missing file declared in a patch array', async () => {
+    const directory = await createTemporaryDirectory();
+    await writeFile(
+      join(directory, 'package.json'),
+      JSON.stringify({
+        dsh: { bundle: { patch: ['./cordis.patch.yml', './presets/cordis.patch.yml'] } },
+      }),
+    );
+    await writeFile(join(directory, 'cordis.patch.yml'), '- id: test-bundle\n  config: {}\n');
+
+    await expect(assertInstallableTarget(directory)).rejects.toThrow('must exist');
+  });
+
   it('accepts an empty DSH patch list', async () => {
     const directory = await createTemporaryDirectory();
     await writeFile(

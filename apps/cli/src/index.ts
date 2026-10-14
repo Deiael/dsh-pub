@@ -9,6 +9,7 @@ import { parseDocument, type ScalarTag } from 'yaml';
 const DEFAULT_PROFILE = 'web';
 const DEFAULT_REGISTRY = 'https://dsh.pub';
 const TELEMETRY_TIMEOUT_MS = 2_000;
+const MAX_BUNDLE_PATCHES = 8;
 
 const dshJsExpressionTag: ScalarTag = {
   tag: 'tag:yaml.org,2002:js',
@@ -175,37 +176,33 @@ export const parseCliArgs = (args: string[]): AddCommandOptions => {
   };
 };
 
-export const assertInstallableTarget = async (target: string) => {
-  let manifest: unknown;
-  try {
-    manifest = JSON.parse(await readFile(join(target, 'package.json'), 'utf8')) as unknown;
-  } catch (error) {
-    const detail = error instanceof Error ? `: ${error.message}` : '';
-    throw new Error(`Install target must contain a valid package.json${detail}`);
+const declaredBundlePatchPaths = (value: unknown): string[] => {
+  if (typeof value === 'string') {
+    if (!value.trim()) {
+      throw new Error('Install target package.json must declare dsh.bundle.patch');
+    }
+    return [value.trim()];
   }
-
-  if (
-    typeof manifest !== 'object' ||
-    manifest === null ||
-    !('dsh' in manifest) ||
-    typeof manifest.dsh !== 'object' ||
-    manifest.dsh === null ||
-    !('bundle' in manifest.dsh) ||
-    typeof manifest.dsh.bundle !== 'object' ||
-    manifest.dsh.bundle === null ||
-    !('patch' in manifest.dsh.bundle) ||
-    typeof manifest.dsh.bundle.patch !== 'string' ||
-    manifest.dsh.bundle.patch.trim() === ''
-  ) {
+  if (!Array.isArray(value)) {
     throw new Error('Install target package.json must declare dsh.bundle.patch');
   }
+  if (value.length === 0) {
+    throw new Error('dsh.bundle.patch must be a non-empty array of paths');
+  }
+  if (value.length > MAX_BUNDLE_PATCHES) {
+    throw new Error(`dsh.bundle.patch must contain at most ${MAX_BUNDLE_PATCHES} paths`);
+  }
+  if (value.some((entry) => typeof entry !== 'string' || !entry.trim())) {
+    throw new Error('dsh.bundle.patch array entries must be non-empty strings');
+  }
+  return value.map((entry) => entry.trim());
+};
 
-  const patch = manifest.dsh.bundle.patch.trim();
+const assertInstallablePatchFile = async (targetRealPath: string, patch: string) => {
   if (isAbsolute(patch)) {
     throw new Error('dsh.bundle.patch must be a relative path inside the install target');
   }
 
-  const targetRealPath = await realpath(target);
   const declaredPatch = resolve(targetRealPath, patch);
   const declaredRelativePath = relative(targetRealPath, declaredPatch);
   if (declaredRelativePath.startsWith('..') || isAbsolute(declaredRelativePath)) {
@@ -241,6 +238,43 @@ export const assertInstallableTarget = async (target: string) => {
     )
   ) {
     throw new Error('dsh.bundle.patch must contain an array of patch entries');
+  }
+
+  return declaredRelativePath;
+};
+
+export const assertInstallableTarget = async (target: string) => {
+  let manifest: unknown;
+  try {
+    manifest = JSON.parse(await readFile(join(target, 'package.json'), 'utf8')) as unknown;
+  } catch (error) {
+    const detail = error instanceof Error ? `: ${error.message}` : '';
+    throw new Error(`Install target must contain a valid package.json${detail}`);
+  }
+
+  if (
+    typeof manifest !== 'object' ||
+    manifest === null ||
+    !('dsh' in manifest) ||
+    typeof manifest.dsh !== 'object' ||
+    manifest.dsh === null ||
+    !('bundle' in manifest.dsh) ||
+    typeof manifest.dsh.bundle !== 'object' ||
+    manifest.dsh.bundle === null ||
+    !('patch' in manifest.dsh.bundle)
+  ) {
+    throw new Error('Install target package.json must declare dsh.bundle.patch');
+  }
+
+  const patches = declaredBundlePatchPaths(manifest.dsh.bundle.patch);
+  const targetRealPath = await realpath(target);
+  const seen = new Set<string>();
+  for (const patch of patches) {
+    const declaredRelativePath = await assertInstallablePatchFile(targetRealPath, patch);
+    if (seen.has(declaredRelativePath)) {
+      throw new Error('dsh.bundle.patch must not contain duplicate paths');
+    }
+    seen.add(declaredRelativePath);
   }
 };
 

@@ -80,8 +80,8 @@ const batchQuery = (batch, mode) => {
       `);
       variables[`manifest${index}`] = `${item.commit}:package.json`;
     } else {
+      const patchPaths = item.contract.patchPaths ?? [item.contract.patchPath];
       const paths = {
-        patch: item.contract.patchPath,
         runtime: item.contract.runtimePath,
         ...(item.contract.client.entryPath ? { client: item.contract.client.entryPath } : {}),
         readme: 'README.md',
@@ -92,11 +92,19 @@ const batchQuery = (batch, mode) => {
       };
       definitions.push(`$owner${index}: String!`, `$name${index}: String!`);
       const objects = [];
+      for (const [patchIndex, path] of patchPaths.entries()) {
+        const variable = `patch${index}_${patchIndex}`;
+        definitions.push(`$${variable}: String!`);
+        variables[variable] = `${item.repository.commit}:${path}`;
+        objects.push(
+          `patch${patchIndex}: object(expression: $${variable}) { ${blobSelection(true)} }`,
+        );
+      }
       for (const [key, path] of Object.entries(paths)) {
         const variable = `${key}${index}`;
         definitions.push(`$${variable}: String!`);
         variables[variable] = `${item.repository.commit}:${path}`;
-        const includeText = ['patch', 'readme', 'readmeZhCn', 'readmeZh'].includes(key);
+        const includeText = ['readme', 'readmeZhCn', 'readmeZh'].includes(key);
         objects.push(`${key}: object(expression: $${variable}) { ${blobSelection(includeText)} }`);
       }
       fields.push(`
@@ -342,6 +350,10 @@ export function createGitHubTopicClient({
             const readmeZh = unwrapObject(repository, 'readmeZh');
             const license = unwrapObject(repository, 'license');
             const licenseMd = unwrapObject(repository, 'licenseMd');
+            const patchPaths = candidate.contract.patchPaths ?? [candidate.contract.patchPath];
+            const patches = patchPaths.map((_, patchIndex) =>
+              unwrapObject(repository, `patch${patchIndex}`),
+            );
             result.set(candidate.repository.repository, {
               client: unwrapObject(repository, 'client'),
               license: license
@@ -349,7 +361,8 @@ export function createGitHubTopicClient({
                 : licenseMd
                   ? { ...licenseMd, path: 'LICENSE.md' }
                   : null,
-              patch: unwrapObject(repository, 'patch'),
+              patch: patches[0] ?? null,
+              patches,
               readme: readme ? { ...readme, path: 'README.md' } : null,
               readmeZh: readmeZhCn
                 ? { ...readmeZhCn, path: 'README.zh-CN.md' }

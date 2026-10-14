@@ -2,6 +2,7 @@ import { Buffer } from 'node:buffer';
 
 import { parseDocument } from 'yaml';
 
+import { catalogBundlePatchPath, normalizeBundlePatchPaths } from './bundle-patch.mjs';
 import {
   PUBLISHER_DELISTED,
   createExcludedRepositorySet,
@@ -371,14 +372,20 @@ const inspectSubmission = async (submission, options) => {
     submissionError('invalid_manifest', 'package.json must contain a JSON object.');
   }
   const metadata = manifestMetadata(manifest);
-  const patchValue = manifest.dsh?.bundle?.patch;
-  if (typeof patchValue !== 'string' || !patchValue.trim()) {
-    submissionError('invalid_manifest', 'package.json must declare dsh.bundle.patch.');
+  const patchRelativePaths = normalizeBundlePatchPaths(manifest.dsh?.bundle?.patch, {
+    missingCode: 'invalid_manifest',
+    missingMessage: 'package.json must declare dsh.bundle.patch.',
+    normalizePath: (value) => normalizePath(value, { allowEmpty: false }),
+    reject: submissionError,
+  });
+  const bundlePatchPaths = patchRelativePaths.map((path) =>
+    repositoryPath(submission.directory, path),
+  );
+  for (const bundlePatchPath of bundlePatchPaths) {
+    const patch = await getFile(inspection, bundlePatchPath);
+    assertPatch(patch.content);
   }
-  const patchRelativePath = normalizePath(patchValue.replace(/^\.\//, ''), { allowEmpty: false });
-  const bundlePatchPath = repositoryPath(submission.directory, patchRelativePath);
-  const patch = await getFile(inspection, bundlePatchPath);
-  assertPatch(patch.content);
+  const bundlePatchPath = catalogBundlePatchPath(bundlePatchPaths);
 
   const runtimeRelativePath = runtimeEntry(manifest);
   const runtimeEntryPath = repositoryPath(submission.directory, runtimeRelativePath);
