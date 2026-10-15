@@ -1,10 +1,10 @@
 {
   "source": {
-    "repository": "https://github.com/topics/dsh-plugin",
-    "generatedAt": "2026-10-14T20:29:14.083Z",
-    "policy": "automated-pinned-source-contracts"
+    "repository": "https://github.com/dsh-pub/dsh-pub",
+    "generatedAt": "2026-10-15T07:56:19.000Z",
+    "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 27, "automated": 10564, "installable": 10597 },
+  "totals": { "reviewed": 6, "submitted": 28, "automated": 10564, "installable": 10598 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -767871,6 +767871,67 @@
         },
         "modelExperience": { "en": "", "zh": "" },
         "limitations": { "en": "", "zh": "" }
+      }
+    },
+    {
+      "id": "github:diwer/dsh-codex-adapter",
+      "slug": "dsh-codex-official-adapter",
+      "name": "dsh-codex-official-adapter",
+      "version": "0.1.0",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-15",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/137",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "ChatGPT subscription model provider for DeepSeek Harness desktop, with image input and host tool calling. Community plugin; not affiliated with OpenAI or DeepSeek.",
+        "zh": "ChatGPT subscription model provider for DeepSeek Harness desktop, with image input and host tool calling. Community plugin; not affiliated with OpenAI or DeepSeek."
+      },
+      "source": {
+        "repository": "https://github.com/diwer/dsh-codex-adapter",
+        "directory": "",
+        "commit": "3ae9758ac471c4147836b26b8faf0ca02a923eca"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": {
+        "profiles": null,
+        "defaultWeb": null,
+        "bundles": ["dsh-codex-official-adapter"]
+      },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/diwer/dsh-codex-adapter/3ae9758ac471c4147836b26b8faf0ca02a923eca/README.md",
+          "zh": "https://raw.githubusercontent.com/diwer/dsh-codex-adapter/3ae9758ac471c4147836b26b8faf0ca02a923eca/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
       }
     }
   ]

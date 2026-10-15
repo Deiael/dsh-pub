@@ -133903,6 +133903,27 @@
       "readmePath": "README.md",
       "licensePath": "LICENSE",
       "automation": { "analyzedAt": "2026-10-15", "method": "automated-static-contract" }
+    },
+    {
+      "repository": "https://github.com/diwer/dsh-codex-adapter",
+      "commit": "3ae9758ac471c4147836b26b8faf0ca02a923eca",
+      "directory": "",
+      "packageName": "dsh-codex-official-adapter",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "src/desktop-plugin.mjs",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/diwer--dsh-codex-adapter.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/137",
+        "submittedAt": "2026-10-15",
+        "category": "client-ui",
+        "description": {
+          "en": "ChatGPT subscription model provider for DeepSeek Harness desktop, with image input and host tool calling. Community plugin; not affiliated with OpenAI or DeepSeek.",
+          "zh": ""
+        }
+      }
     }
   ]
 }

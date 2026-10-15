@@ -7,9 +7,9 @@
       "generatedAt": "2026-08-13T19:38:46+08:00"
     },
     "community": {
-      "repository": "https://github.com/topics/dsh-plugin",
-      "generatedAt": "2026-10-14T20:29:14.083Z",
-      "policy": "automated-pinned-source-contracts"
+      "repository": "https://github.com/dsh-pub/dsh-pub",
+      "generatedAt": "2026-10-15T07:56:19.000Z",
+      "policy": "pinned-source-contracts"
     }
   },
   "topics": [
@@ -221929,6 +221929,26 @@
       "repository": "https://github.com/zyfgood/dsh-web-search-tavily",
       "directory": "",
       "commit": "63350f7d49964df26f263c6afad1efba6d6a4ab6"
+    },
+    {
+      "slug": "dsh-codex-official-adapter",
+      "name": "dsh-codex-official-adapter",
+      "description": {
+        "en": "ChatGPT subscription model provider for DeepSeek Harness desktop, with image input and host tool calling. Community plugin; not affiliated with OpenAI or DeepSeek.",
+        "zh": "ChatGPT subscription model provider for DeepSeek Harness desktop, with image input and host tool calling. Community plugin; not affiliated with OpenAI or DeepSeek."
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/diwer/dsh-codex-adapter",
+      "directory": "",
+      "commit": "3ae9758ac471c4147836b26b8faf0ca02a923eca"
     }
   ]
 }
