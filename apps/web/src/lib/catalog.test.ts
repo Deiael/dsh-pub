@@ -14,6 +14,7 @@ import {
   installCommand,
   installMetricSlug,
   localized,
+  npmPackageUrl,
   provenanceStatus,
   seoDescription,
   sourceUrl,
@@ -84,6 +85,23 @@ describe('web catalog projection', () => {
     expect(installCommand(automation)).toBe(
       'npx dshpub add titanwings/dsh-automation --ref 3c0188d7d94ed5b1e8caffeb73d7ac7ab34aabb3',
     );
+  });
+
+  it('exposes npm links only for packages with explicit repository verification', () => {
+    const connector = communityEntries.find((entry) => entry.slug === 'dsh-mcp-connector');
+    const unverified = communityEntries.find(
+      (entry) =>
+        entry.provenance?.status === 'community-automated' && entry.slug !== 'dsh-mcp-connector',
+    );
+    expect(connector?.distribution.npm).toMatchObject({
+      packageName: 'dsh-mcp-connector',
+      verification: 'npm-registry-repository',
+    });
+    expect(connector && npmPackageUrl(connector)).toBe(
+      'https://www.npmjs.com/package/dsh-mcp-connector',
+    );
+    expect(unverified).toBeDefined();
+    if (unverified) expect(npmPackageUrl(unverified)).toBeUndefined();
   });
 
   it('provides bilingual text and pinned source links', () => {
