@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
+import rawVerifiedNpmPackages from '../../../../packages/catalog/src/verified-npm-packages.json';
 import {
   builtInEntries,
   bundleEntries,
@@ -9,6 +10,7 @@ import {
   featuredEntries,
   installableEntries,
   marketplaceEntries,
+  normalizeRepository,
 } from './catalog.js';
 import {
   installCommand,
@@ -23,6 +25,25 @@ import { copy } from './i18n.js';
 import { entriesForTopic, registryTopics, topicForEntry } from './topics.js';
 
 describe('web catalog projection', () => {
+  it('normalizes npm repository URL variants into one comparable repository key', () => {
+    const canonical = 'https://github.com/duhu2000/dsh-mcp-connector';
+    const variants = [
+      canonical,
+      'https://github.com/duhu2000/dsh-mcp-connector.git',
+      'https://github.com/duhu2000/dsh-mcp-connector/',
+      'git+https://github.com/duhu2000/dsh-mcp-connector.git',
+      'git://github.com/duhu2000/dsh-mcp-connector.git',
+      'git@github.com:duhu2000/dsh-mcp-connector.git',
+      'ssh://git@github.com/duhu2000/dsh-mcp-connector.git',
+      'github:duhu2000/dsh-mcp-connector',
+      'duhu2000/dsh-mcp-connector',
+    ];
+
+    expect(new Set(variants.map((repository) => normalizeRepository(repository)))).toEqual(
+      new Set([canonical]),
+    );
+  });
+
   it('names the registry around the primary bilingual search intent', () => {
     expect(copy.en.registryPageTitle).toBe('DeepSeek Harness Plugin Registry: Browse DSH Plugins');
     expect(copy.en.registryGuideTitle).toBe('Find, install, and publish DSH plugins');
@@ -88,6 +109,30 @@ describe('web catalog projection', () => {
   });
 
   it('exposes npm links only for packages with explicit repository verification', () => {
+    const verifiedByRepository = new Map(
+      (
+        rawVerifiedNpmPackages.entries as Array<{
+          repository: string;
+          packageName: string;
+        }>
+      ).map((entry) => [normalizeRepository(entry.repository), entry.packageName]),
+    );
+    const entriesWithNpmLink = marketplaceEntries.filter((entry) =>
+      Boolean(entry.distribution.npm),
+    );
+    expect(entriesWithNpmLink.length).toBeGreaterThan(0);
+    expect(
+      entriesWithNpmLink.every((entry) => {
+        const verifiedName = verifiedByRepository.get(normalizeRepository(entry.source.repository));
+        return (
+          entry.distribution.installable &&
+          Boolean(verifiedName) &&
+          verifiedName === entry.name &&
+          entry.distribution.npm?.packageName === entry.name
+        );
+      }),
+    ).toBe(true);
+
     const connector = communityEntries.find((entry) => entry.slug === 'dsh-mcp-connector');
     const unverified = communityEntries.find(
       (entry) =>

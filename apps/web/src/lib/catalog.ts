@@ -41,11 +41,42 @@ interface VerifiedNpmPackage {
   registry: string;
 }
 
-const normalizeRepository = (repository: string) =>
-  repository
-    .toLocaleLowerCase()
-    .replace(/\/$/, '')
-    .replace(/\.git$/, '');
+export const normalizeRepository = (repository: string) => {
+  let normalized = repository.trim().toLocaleLowerCase();
+
+  while (normalized.startsWith('git+')) normalized = normalized.slice('git+'.length);
+
+  if (normalized.startsWith('github:')) {
+    normalized = `https://github.com/${normalized.slice('github:'.length)}`;
+  }
+
+  const scpStyleMatch = normalized.match(/^(?:ssh:\/\/)?git@([^/:]+)[:/]([^#?]+)$/);
+  if (scpStyleMatch) {
+    normalized = `https://${scpStyleMatch[1]}/${scpStyleMatch[2]}`;
+  } else if (normalized.startsWith('git://')) {
+    normalized = `https://${normalized.slice('git://'.length)}`;
+  }
+
+  const githubShorthand = normalized.match(/^([a-z0-9_.-]+)\/([a-z0-9_.-]+)$/);
+  if (githubShorthand && !githubShorthand[1].includes('.')) {
+    normalized = `https://github.com/${normalized}`;
+  }
+
+  try {
+    const parsed = new URL(normalized);
+    normalized = `${parsed.hostname}${parsed.pathname}`;
+  } catch {
+    // Keep non-URL inputs unchanged and normalize with suffix trimming below.
+  }
+
+  normalized = normalized.replace(/^github\.com\//, 'https://github.com/');
+  normalized = normalized
+    .replace(/\/+$/, '')
+    .replace(/\.git$/, '')
+    .replace(/\/+$/, '');
+
+  return normalized;
+};
 
 const verifiedNpmPackages = new Map(
   (rawVerifiedNpmPackages.entries as VerifiedNpmPackage[]).map((entry) => [
