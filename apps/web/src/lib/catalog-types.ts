@@ -82,6 +82,11 @@ export interface CatalogEntry {
     activation?: 'profile-layer';
     note?: LocalizedText;
     command?: string;
+    npm?: {
+      packageName: string;
+      verifiedAt: string;
+      verification: 'npm-registry-repository';
+    };
   };
 }
 
@@ -125,6 +130,11 @@ export function installCommand(entry: CatalogEntry): string | undefined {
   if (!entry.distribution.installable) return undefined;
   const path = entry.source.directory ? ` --path ${entry.source.directory}` : '';
   return `npx dshpub add ${sourceCoordinate(entry)} --ref ${entry.source.commit}${path}`;
+}
+
+export function npmPackageUrl(entry: CatalogEntry): string | undefined {
+  const packageName = entry.distribution.npm?.packageName;
+  return packageName ? `https://www.npmjs.com/package/${packageName}` : undefined;
 }
 
 export function displayName(entry: CatalogEntry): string {

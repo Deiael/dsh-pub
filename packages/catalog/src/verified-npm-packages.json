@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "repository": "https://github.com/duhu2000/dsh-mcp-connector",
+      "packageName": "dsh-mcp-connector",
+      "verifiedAt": "2026-10-16",
+      "verification": "npm-registry-repository",
+      "registry": "https://registry.npmjs.org/dsh-mcp-connector"
+    }
+  ]
+}

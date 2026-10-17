@@ -13,6 +13,7 @@ import {
   installCommand,
   installMetricSlug,
   localized,
+  npmPackageUrl,
   provenanceStatus,
   seoDescription,
   sourceCoordinate,
@@ -73,6 +74,7 @@ const sourceRel = provenance === 'built-in' ? undefined : 'ugc';
 const noIndex = provenance === 'community-automated';
 const topic = topicForEntry(entry);
 const command = installCommand(entry);
+const npmPackage = npmPackageUrl(entry);
 const distributionNote = localized(entry.distribution.note, locale);
 const provenanceStatement =
   entry.provenance?.status === 'community-reviewed' ||
@@ -385,6 +387,18 @@ const structuredData = [
         <a class="source-button" href={source} id="source" rel={sourceRel}>
           <Icon name="github" size={17} />{t.openGitHub}<Icon name="external" size={14} />
         </a>
+        {
+          npmPackage && (
+            <a
+              class="source-button"
+              href={npmPackage}
+              data-npm-package={entry.distribution.npm?.packageName}
+            >
+              npm · {entry.distribution.npm?.packageName}
+              <Icon name="external" size={14} />
+            </a>
+          )
+        }
       </section>
 
       {
@@ -1239,6 +1253,10 @@ const structuredData = [
     border-color: var(--color-navy-800);
     color: white;
     text-decoration: none;
+  }
+
+  .source-button + .source-button {
+    margin-top: 0.6rem;
   }
 
   @media (max-width: 900px) {

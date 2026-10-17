@@ -1,5 +1,6 @@
 import rawCatalog from '../../../../packages/catalog/src/catalog.generated.json';
 import rawCommunityCatalog from '../../../../packages/catalog/src/community.generated.json';
+import rawVerifiedNpmPackages from '../../../../packages/catalog/src/verified-npm-packages.json';
 
 import { provenanceStatus, type CatalogData, type CatalogEntry } from './catalog-types.js';
 
@@ -32,15 +33,88 @@ const capabilityOverlays: Record<string, Partial<CatalogEntry['capabilities']>> 
   },
 };
 
+interface VerifiedNpmPackage {
+  repository: string;
+  packageName: string;
+  verifiedAt: string;
+  verification: 'npm-registry-repository';
+  registry: string;
+}
+
+export const normalizeRepository = (repository: string) => {
+  let normalized = repository.trim().toLocaleLowerCase();
+
+  while (normalized.startsWith('git+')) normalized = normalized.slice('git+'.length);
+
+  if (normalized.startsWith('github:')) {
+    normalized = `https://github.com/${normalized.slice('github:'.length)}`;
+  }
+
+  const scpStyleMatch = normalized.match(/^(?:ssh:\/\/)?git@([^/:]+)[:/]([^#?]+)$/);
+  if (scpStyleMatch) {
+    normalized = `https://${scpStyleMatch[1]}/${scpStyleMatch[2]}`;
+  } else if (normalized.startsWith('git://')) {
+    normalized = `https://${normalized.slice('git://'.length)}`;
+  }
+
+  const githubShorthand = normalized.match(/^([a-z0-9_.-]+)\/([a-z0-9_.-]+)$/);
+  if (githubShorthand && !githubShorthand[1].includes('.')) {
+    normalized = `https://github.com/${normalized}`;
+  }
+
+  try {
+    const parsed = new URL(normalized);
+    normalized = `${parsed.hostname}${parsed.pathname}`;
+  } catch {
+    // Keep non-URL inputs unchanged and normalize with suffix trimming below.
+  }
+
+  normalized = normalized.replace(/^github\.com\//, 'https://github.com/');
+  normalized = normalized
+    .replace(/\/+$/, '')
+    .replace(/\.git$/, '')
+    .replace(/\/+$/, '');
+
+  return normalized;
+};
+
+const verifiedNpmPackages = new Map(
+  (rawVerifiedNpmPackages.entries as VerifiedNpmPackage[]).map((entry) => [
+    normalizeRepository(entry.repository),
+    entry,
+  ]),
+);
+
 function enriched(entry: CatalogEntry): CatalogEntry {
   const overlay = capabilityOverlays[entry.slug];
-  if (!overlay) return entry;
+  const verifiedNpmPackage = verifiedNpmPackages.get(normalizeRepository(entry.source.repository));
+  const npm =
+    entry.distribution.installable && verifiedNpmPackage?.packageName === entry.name
+      ? {
+          packageName: verifiedNpmPackage.packageName,
+          verifiedAt: verifiedNpmPackage.verifiedAt,
+          verification: verifiedNpmPackage.verification,
+        }
+      : undefined;
+  if (!overlay && !npm) return entry;
   return {
     ...entry,
-    capabilities: {
-      ...entry.capabilities,
-      ...overlay,
-    },
+    ...(overlay
+      ? {
+          capabilities: {
+            ...entry.capabilities,
+            ...overlay,
+          },
+        }
+      : {}),
+    ...(npm
+      ? {
+          distribution: {
+            ...entry.distribution,
+            npm,
+          },
+        }
+      : {}),
   };
 }
 
