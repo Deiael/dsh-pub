@@ -140760,6 +140760,27 @@
           "zh": ""
         }
       }
+    },
+    {
+      "repository": "https://github.com/DoveLi-Gu/dsh-dyou-wine",
+      "commit": "f12d7d0c836829d06d10a0f08a7b5f3b58a654d2",
+      "directory": "",
+      "packageName": "dsh-dyou-wine",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "lib/host.js",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/doveli-gu--dsh-dyou-wine.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/144",
+        "submittedAt": "2026-10-18",
+        "category": "client-ui",
+        "description": {
+          "en": "D友の酒 · Dyou Wine: fixed-rhythm page bounce, a flying whale-girl pet and bundled BGM for DeepSeek Harness.",
+          "zh": ""
+        }
+      }
     }
   ]
 }

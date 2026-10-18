@@ -1,10 +1,10 @@
 {
   "source": {
     "repository": "https://github.com/dsh-pub/dsh-pub",
-    "generatedAt": "2026-10-18T02:21:55.000Z",
+    "generatedAt": "2026-10-18T07:30:51.000Z",
     "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 30, "automated": 11098, "installable": 11134 },
+  "totals": { "reviewed": 6, "submitted": 31, "automated": 11098, "installable": 11135 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -807264,6 +807264,63 @@
         "readme": {
           "en": "https://raw.githubusercontent.com/jiulingchen80-hash/dsh-ziwei-panel/a92bea128905e4c4f90489d35494c024bf74e772/README.md",
           "zh": "https://raw.githubusercontent.com/jiulingchen80-hash/dsh-ziwei-panel/a92bea128905e4c4f90489d35494c024bf74e772/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      }
+    },
+    {
+      "id": "github:DoveLi-Gu/dsh-dyou-wine",
+      "slug": "dsh-dyou-wine",
+      "name": "dsh-dyou-wine",
+      "version": "0.1.0-alpha.13",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-18",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/144",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "D友の酒 · Dyou Wine: fixed-rhythm page bounce, a flying whale-girl pet and bundled BGM for DeepSeek Harness.",
+        "zh": "D友の酒 · Dyou Wine: fixed-rhythm page bounce, a flying whale-girl pet and bundled BGM for DeepSeek Harness."
+      },
+      "source": {
+        "repository": "https://github.com/DoveLi-Gu/dsh-dyou-wine",
+        "directory": "",
+        "commit": "f12d7d0c836829d06d10a0f08a7b5f3b58a654d2"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": { "profiles": null, "defaultWeb": null, "bundles": ["dsh-dyou-wine"] },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/DoveLi-Gu/dsh-dyou-wine/f12d7d0c836829d06d10a0f08a7b5f3b58a654d2/README.md",
+          "zh": "https://raw.githubusercontent.com/DoveLi-Gu/dsh-dyou-wine/f12d7d0c836829d06d10a0f08a7b5f3b58a654d2/README.md"
         },
         "modelExperience": {
           "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",

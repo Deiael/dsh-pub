@@ -8,7 +8,7 @@
     },
     "community": {
       "repository": "https://github.com/dsh-pub/dsh-pub",
-      "generatedAt": "2026-10-18T02:21:55.000Z",
+      "generatedAt": "2026-10-18T07:30:51.000Z",
       "policy": "pinned-source-contracts"
     }
   },
@@ -233055,6 +233055,26 @@
       "repository": "https://github.com/jiulingchen80-hash/dsh-ziwei-panel",
       "directory": "",
       "commit": "a92bea128905e4c4f90489d35494c024bf74e772"
+    },
+    {
+      "slug": "dsh-dyou-wine",
+      "name": "dsh-dyou-wine",
+      "description": {
+        "en": "D友の酒 · Dyou Wine: fixed-rhythm page bounce, a flying whale-girl pet and bundled BGM for DeepSeek Harness.",
+        "zh": "D友の酒 · Dyou Wine: fixed-rhythm page bounce, a flying whale-girl pet and bundled BGM for DeepSeek Harness."
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/DoveLi-Gu/dsh-dyou-wine",
+      "directory": "",
+      "commit": "f12d7d0c836829d06d10a0f08a7b5f3b58a654d2"
     }
   ]
 }
