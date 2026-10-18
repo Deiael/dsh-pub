@@ -140739,6 +140739,27 @@
       "readmePath": "README.md",
       "licensePath": "LICENSE",
       "automation": { "analyzedAt": "2026-10-18", "method": "automated-static-contract" }
+    },
+    {
+      "repository": "https://github.com/jiulingchen80-hash/dsh-ziwei-panel",
+      "commit": "a92bea128905e4c4f90489d35494c024bf74e772",
+      "directory": "",
+      "packageName": "dsh-ziwei-panel",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "index.js",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/jiulingchen80-hash--dsh-ziwei-panel.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/143",
+        "submittedAt": "2026-10-18",
+        "category": "client-ui",
+        "description": {
+          "en": "在 Harness 里打开钦天紫微斗数排盘面板：十二宫、大限流年、四柱。",
+          "zh": ""
+        }
+      }
     }
   ]
 }

@@ -7,9 +7,9 @@
       "generatedAt": "2026-08-13T19:38:46+08:00"
     },
     "community": {
-      "repository": "https://github.com/topics/dsh-plugin",
-      "generatedAt": "2026-10-17T19:02:39.404Z",
-      "policy": "automated-pinned-source-contracts"
+      "repository": "https://github.com/dsh-pub/dsh-pub",
+      "generatedAt": "2026-10-18T02:21:55.000Z",
+      "policy": "pinned-source-contracts"
     }
   },
   "topics": [
@@ -233035,6 +233035,26 @@
       "repository": "https://github.com/Zyr147258/dsh-leike-pet",
       "directory": "",
       "commit": "c873d310eea517b6f066e5476c101ab0d7a0a0ae"
+    },
+    {
+      "slug": "dsh-ziwei-panel",
+      "name": "dsh-ziwei-panel",
+      "description": {
+        "en": "在 Harness 里打开钦天紫微斗数排盘面板：十二宫、大限流年、四柱。",
+        "zh": "在 Harness 里打开钦天紫微斗数排盘面板：十二宫、大限流年、四柱。"
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/jiulingchen80-hash/dsh-ziwei-panel",
+      "directory": "",
+      "commit": "a92bea128905e4c4f90489d35494c024bf74e772"
     }
   ]
 }
