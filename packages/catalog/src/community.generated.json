@@ -1,10 +1,10 @@
 {
   "source": {
-    "repository": "https://github.com/topics/dsh-plugin",
-    "generatedAt": "2026-10-18T19:14:37.694Z",
-    "policy": "automated-pinned-source-contracts"
+    "repository": "https://github.com/dsh-pub/dsh-pub",
+    "generatedAt": "2026-10-19T01:14:10.000Z",
+    "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 31, "automated": 11424, "installable": 11461 },
+  "totals": { "reviewed": 6, "submitted": 32, "automated": 11424, "installable": 11462 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -831273,6 +831273,67 @@
         "limitations": {
           "en": "- **Chinese-first.** Role prompts, deliverables, file names, and workflows default to Chinese.\n- **No network verification by default.** Numeric-level source checks often remain \"pending manual review\" because paywalled and offline sources cannot be fetched.\n- **Audit independence has a cost.** A full run dispatches 15+ subagents; most token spend is context reads, not generation.\n- **M-gate false positives are possible.** A script can flag a legitimate construct; the finalizer must record `script_exit_raw` and justify the `exit` verdict rather than editing the document to force exit 0.\n- **Not a substitute for peer review.** The T9 report is a pre-submission simulation only.",
           "zh": "- **Chinese-first.** Role prompts, deliverables, file names, and workflows default to Chinese.\n- **No network verification by default.** Numeric-level source checks often remain \"pending manual review\" because paywalled and offline sources cannot be fetched.\n- **Audit independence has a cost.** A full run dispatches 15+ subagents; most token spend is context reads, not generation.\n- **M-gate false positives are possible.** A script can flag a legitimate construct; the finalizer must record `script_exit_raw` and justify the `exit` verdict rather than editing the document to force exit 0.\n- **Not a substitute for peer review.** The T9 report is a pre-submission simulation only."
+        }
+      }
+    },
+    {
+      "id": "github:zerosloney/dsh-system-one",
+      "slug": "dsh-systemone",
+      "name": "@master0071/dsh-systemone",
+      "version": "0.6.1",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-19",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/145",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "DeepSeek Harness 插件：将 SystemOne 决策模型（默认云知声 u2-decision，可切换提供商）接入软件开发、需求预检、客服、内容审核、路由、销售线索、风控、招聘、数据治理、教育、需求变更等 11 大业务场景，为 Agent 返回带概率分布的决策与处置建议。",
+        "zh": "DeepSeek Harness 插件：将 SystemOne 决策模型（默认云知声 u2-decision，可切换提供商）接入软件开发、需求预检、客服、内容审核、路由、销售线索、风控、招聘、数据治理、教育、需求变更等 11 大业务场景，为 Agent 返回带概率分布的决策与处置建议。"
+      },
+      "source": {
+        "repository": "https://github.com/zerosloney/dsh-system-one",
+        "directory": "",
+        "commit": "1132efe9127d41026f405e0e26958edb5b84877f"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": {
+        "profiles": null,
+        "defaultWeb": null,
+        "bundles": ["@master0071/dsh-systemone"]
+      },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/zerosloney/dsh-system-one/1132efe9127d41026f405e0e26958edb5b84877f/README.md",
+          "zh": "https://raw.githubusercontent.com/zerosloney/dsh-system-one/1132efe9127d41026f405e0e26958edb5b84877f/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
         }
       }
     }

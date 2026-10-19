@@ -7,9 +7,9 @@
       "generatedAt": "2026-08-13T19:38:46+08:00"
     },
     "community": {
-      "repository": "https://github.com/topics/dsh-plugin",
-      "generatedAt": "2026-10-18T19:14:37.694Z",
-      "policy": "automated-pinned-source-contracts"
+      "repository": "https://github.com/dsh-pub/dsh-pub",
+      "generatedAt": "2026-10-19T01:14:10.000Z",
+      "policy": "pinned-source-contracts"
     }
   },
   "topics": [
@@ -239836,6 +239836,26 @@
       "repository": "https://github.com/zuoyunlai/lunheng-article-pipeline-dsh",
       "directory": "",
       "commit": "22a49fe619663e29dc3caf0a6367889b7077da9c"
+    },
+    {
+      "slug": "dsh-systemone",
+      "name": "@master0071/dsh-systemone",
+      "description": {
+        "en": "DeepSeek Harness 插件：将 SystemOne 决策模型（默认云知声 u2-decision，可切换提供商）接入软件开发、需求预检、客服、内容审核、路由、销售线索、风控、招聘、数据治理、教育、需求变更等 11 大业务场景，为 Agent 返回带概率分布的决策与处置建议。",
+        "zh": "DeepSeek Harness 插件：将 SystemOne 决策模型（默认云知声 u2-decision，可切换提供商）接入软件开发、需求预检、客服、内容审核、路由、销售线索、风控、招聘、数据治理、教育、需求变更等 11 大业务场景，为 Agent 返回带概率分布的决策与处置建议。"
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/zerosloney/dsh-system-one",
+      "directory": "",
+      "commit": "1132efe9127d41026f405e0e26958edb5b84877f"
     }
   ]
 }
