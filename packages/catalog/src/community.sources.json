@@ -149155,6 +149155,27 @@
           "zh": ""
         }
       }
+    },
+    {
+      "repository": "https://github.com/MountBatten718/dsh-session-handoff",
+      "commit": "65c1774837619b469d631eddba898fe4946470a8",
+      "directory": "",
+      "packageName": "dsh-session-handoff",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "index.mjs",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/mountbatten718--dsh-session-handoff.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/148",
+        "submittedAt": "2026-10-20",
+        "category": "client-ui",
+        "description": {
+          "en": "Hand your long DSH session over to a fresh one: /handoff summarizes the recent conversation with an LLM, creates a clean new session in the same workspace, injects the summary as its first message, and auto-opens it. The origin session is unchanged.",
+          "zh": ""
+        }
+      }
     }
   ]
 }

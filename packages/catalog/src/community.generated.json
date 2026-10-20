@@ -1,10 +1,10 @@
 {
   "source": {
     "repository": "https://github.com/dsh-pub/dsh-pub",
-    "generatedAt": "2026-10-20T03:30:58.000Z",
+    "generatedAt": "2026-10-20T08:19:15.000Z",
     "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 33, "automated": 11751, "installable": 11790 },
+  "totals": { "reviewed": 6, "submitted": 34, "automated": 11751, "installable": 11791 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -855814,6 +855814,63 @@
         "readme": {
           "en": "https://raw.githubusercontent.com/Seren-715/dsh-remote-groups/4fa098c0df5263a270772dd3201ea530de16a4a2/README.md",
           "zh": "https://raw.githubusercontent.com/Seren-715/dsh-remote-groups/4fa098c0df5263a270772dd3201ea530de16a4a2/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      }
+    },
+    {
+      "id": "github:MountBatten718/dsh-session-handoff",
+      "slug": "mountbatten718-dsh-session-handoff",
+      "name": "dsh-session-handoff",
+      "version": "0.3.0",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-20",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/148",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "Hand your long DSH session over to a fresh one: /handoff summarizes the recent conversation with an LLM, creates a clean new session in the same workspace, injects the summary as its first message, and auto-opens it. The origin session is unchanged.",
+        "zh": "Hand your long DSH session over to a fresh one: /handoff summarizes the recent conversation with an LLM, creates a clean new session in the same workspace, injects the summary as its first message, and auto-opens it. The origin session is unchanged."
+      },
+      "source": {
+        "repository": "https://github.com/MountBatten718/dsh-session-handoff",
+        "directory": "",
+        "commit": "65c1774837619b469d631eddba898fe4946470a8"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": { "profiles": null, "defaultWeb": null, "bundles": ["dsh-session-handoff"] },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.zh-CN.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/MountBatten718/dsh-session-handoff/65c1774837619b469d631eddba898fe4946470a8/README.md",
+          "zh": "https://raw.githubusercontent.com/MountBatten718/dsh-session-handoff/65c1774837619b469d631eddba898fe4946470a8/README.zh-CN.md"
         },
         "modelExperience": {
           "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",

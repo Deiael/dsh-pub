@@ -8,7 +8,7 @@
     },
     "community": {
       "repository": "https://github.com/dsh-pub/dsh-pub",
-      "generatedAt": "2026-10-20T03:30:58.000Z",
+      "generatedAt": "2026-10-20T08:19:15.000Z",
       "policy": "pinned-source-contracts"
     }
   },
@@ -246670,6 +246670,26 @@
       "repository": "https://github.com/Seren-715/dsh-remote-groups",
       "directory": "",
       "commit": "4fa098c0df5263a270772dd3201ea530de16a4a2"
+    },
+    {
+      "slug": "mountbatten718-dsh-session-handoff",
+      "name": "dsh-session-handoff",
+      "description": {
+        "en": "Hand your long DSH session over to a fresh one: /handoff summarizes the recent conversation with an LLM, creates a clean new session in the same workspace, injects the summary as its first message, and auto-opens it. The origin session is unchanged.",
+        "zh": "Hand your long DSH session over to a fresh one: /handoff summarizes the recent conversation with an LLM, creates a clean new session in the same workspace, injects the summary as its first message, and auto-opens it. The origin session is unchanged."
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/MountBatten718/dsh-session-handoff",
+      "directory": "",
+      "commit": "65c1774837619b469d631eddba898fe4946470a8"
     }
   ]
 }
