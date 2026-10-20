@@ -7,9 +7,9 @@
       "generatedAt": "2026-08-13T19:38:46+08:00"
     },
     "community": {
-      "repository": "https://github.com/topics/dsh-plugin",
-      "generatedAt": "2026-10-19T21:20:41.109Z",
-      "policy": "automated-pinned-source-contracts"
+      "repository": "https://github.com/dsh-pub/dsh-pub",
+      "generatedAt": "2026-10-20T03:30:58.000Z",
+      "policy": "pinned-source-contracts"
     }
   },
   "topics": [
@@ -246650,6 +246650,26 @@
       "repository": "https://github.com/zzt0818/dsh-task-details",
       "directory": "",
       "commit": "18339fa9355de74e3ced8c33e7667d28c13b8c16"
+    },
+    {
+      "slug": "dsh-remote-groups",
+      "name": "dsh-remote-groups",
+      "description": {
+        "en": "DSH Remote Groups: one plugin for phone remote access and multi-agent group chats",
+        "zh": "DSH Remote Groups: one plugin for phone remote access and multi-agent group chats"
+      },
+      "topic": "other",
+      "category": "bundles",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/Seren-715/dsh-remote-groups",
+      "directory": "",
+      "commit": "4fa098c0df5263a270772dd3201ea530de16a4a2"
     }
   ]
 }

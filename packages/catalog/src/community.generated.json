@@ -1,10 +1,10 @@
 {
   "source": {
-    "repository": "https://github.com/topics/dsh-plugin",
-    "generatedAt": "2026-10-19T21:20:41.109Z",
-    "policy": "automated-pinned-source-contracts"
+    "repository": "https://github.com/dsh-pub/dsh-pub",
+    "generatedAt": "2026-10-20T03:30:58.000Z",
+    "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 32, "automated": 11751, "installable": 11789 },
+  "totals": { "reviewed": 6, "submitted": 33, "automated": 11751, "installable": 11790 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -855766,6 +855766,63 @@
         },
         "modelExperience": { "en": "", "zh": "" },
         "limitations": { "en": "", "zh": "" }
+      }
+    },
+    {
+      "id": "github:Seren-715/dsh-remote-groups",
+      "slug": "dsh-remote-groups",
+      "name": "dsh-remote-groups",
+      "version": "0.1.0-preview.4",
+      "license": "Apache-2.0",
+      "type": "bundle",
+      "category": "bundles",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-20",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/147",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "DSH Remote Groups: one plugin for phone remote access and multi-agent group chats",
+        "zh": "DSH Remote Groups: one plugin for phone remote access and multi-agent group chats"
+      },
+      "source": {
+        "repository": "https://github.com/Seren-715/dsh-remote-groups",
+        "directory": "",
+        "commit": "4fa098c0df5263a270772dd3201ea530de16a4a2"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": { "profiles": null, "defaultWeb": null, "bundles": ["dsh-remote-groups"] },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/Seren-715/dsh-remote-groups/4fa098c0df5263a270772dd3201ea530de16a4a2/README.md",
+          "zh": "https://raw.githubusercontent.com/Seren-715/dsh-remote-groups/4fa098c0df5263a270772dd3201ea530de16a4a2/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
       }
     }
   ]

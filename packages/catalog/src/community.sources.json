@@ -149134,6 +149134,27 @@
       "readmePath": "README.md",
       "licensePath": "LICENSE",
       "automation": { "analyzedAt": "2026-10-20", "method": "automated-static-contract" }
+    },
+    {
+      "repository": "https://github.com/Seren-715/dsh-remote-groups",
+      "commit": "4fa098c0df5263a270772dd3201ea530de16a4a2",
+      "directory": "",
+      "packageName": "dsh-remote-groups",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "plugin/cordis.patch.yml",
+      "runtimeEntryPath": "plugin/index.js",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/seren-715--dsh-remote-groups.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/147",
+        "submittedAt": "2026-10-20",
+        "category": "bundles",
+        "description": {
+          "en": "DSH Remote Groups: one plugin for phone remote access and multi-agent group chats",
+          "zh": ""
+        }
+      }
     }
   ]
 }
