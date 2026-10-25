@@ -160845,6 +160845,27 @@
       "readmePath": "README.md",
       "licensePath": "LICENSE",
       "automation": { "analyzedAt": "2026-10-23", "method": "automated-static-contract" }
+    },
+    {
+      "repository": "https://github.com/Octo-o-o-o/gpt-image-design",
+      "commit": "9706c6e4af3c428a0875a66ef36b2c9b33bc021b",
+      "directory": "",
+      "packageName": "gpt-image-design",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "lib/index.js",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/octo-o-o-o--gpt-image-design.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/153",
+        "submittedAt": "2026-10-23",
+        "category": "client-ui",
+        "description": {
+          "en": "在 DSH 中用 ChatGPT Pro 网页会话或任意 OpenAI 兼容生图 API 出设计图与单文件 HTML demo；图片和代码保存到本地，侧边栏画廊预览、iframe 打开。Generate images and HTML demos via a real ChatGPT Pro web session or an OpenAI-compatible image API, saved locally with a gallery in DSH.",
+          "zh": ""
+        }
+      }
     }
   ]
 }

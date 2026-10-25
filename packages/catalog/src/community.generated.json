@@ -1,10 +1,10 @@
 {
   "source": {
-    "repository": "https://github.com/topics/dsh-plugin",
-    "generatedAt": "2026-10-22T20:25:43.369Z",
-    "policy": "automated-pinned-source-contracts"
+    "repository": "https://github.com/dsh-pub/dsh-pub",
+    "generatedAt": "2026-10-23T07:45:46.000Z",
+    "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 34, "automated": 12664, "installable": 12704 },
+  "totals": { "reviewed": 6, "submitted": 35, "automated": 12664, "installable": 12705 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -923733,6 +923733,63 @@
         },
         "modelExperience": { "en": "", "zh": "" },
         "limitations": { "en": "", "zh": "" }
+      }
+    },
+    {
+      "id": "github:Octo-o-o-o/gpt-image-design",
+      "slug": "gpt-image-design",
+      "name": "gpt-image-design",
+      "version": "0.3.2",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-23",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/153",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "在 DSH 中用 ChatGPT Pro 网页会话或任意 OpenAI 兼容生图 API 出设计图与单文件 HTML demo；图片和代码保存到本地，侧边栏画廊预览、iframe 打开。Generate images and HTML demos via a real ChatGPT Pro web session or an OpenAI-compatible image API, saved locally with a gallery in DSH.",
+        "zh": "在 DSH 中用 ChatGPT Pro 网页会话或任意 OpenAI 兼容生图 API 出设计图与单文件 HTML demo；图片和代码保存到本地，侧边栏画廊预览、iframe 打开。Generate images and HTML demos via a real ChatGPT Pro web session or an OpenAI-compatible image API, saved locally with a gallery in DSH."
+      },
+      "source": {
+        "repository": "https://github.com/Octo-o-o-o/gpt-image-design",
+        "directory": "",
+        "commit": "9706c6e4af3c428a0875a66ef36b2c9b33bc021b"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": { "profiles": null, "defaultWeb": null, "bundles": ["gpt-image-design"] },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/Octo-o-o-o/gpt-image-design/9706c6e4af3c428a0875a66ef36b2c9b33bc021b/README.md",
+          "zh": "https://raw.githubusercontent.com/Octo-o-o-o/gpt-image-design/9706c6e4af3c428a0875a66ef36b2c9b33bc021b/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
       }
     }
   ]
