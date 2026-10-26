@@ -172218,6 +172218,27 @@
       "readmePath": "README.md",
       "licensePath": "LICENSE",
       "automation": { "analyzedAt": "2026-10-26", "method": "automated-static-contract" }
+    },
+    {
+      "repository": "https://github.com/jueduihouqi-GG/dsh-runtime-map",
+      "commit": "06195320e39a74477d64de1ef00995f0feb48035",
+      "directory": "",
+      "packageName": "dsh-runtime-map",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "lib/index.mjs",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/jueduihouqi-gg--dsh-runtime-map.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/158",
+        "submittedAt": "2026-10-26",
+        "category": "client-ui",
+        "description": {
+          "en": "Runtime Map：在 DeepSeek Harness 中汇集原生目录、可信状态与共享关系画布",
+          "zh": ""
+        }
+      }
     }
   ]
 }

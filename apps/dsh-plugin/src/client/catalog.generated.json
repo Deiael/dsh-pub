@@ -7,9 +7,9 @@
       "generatedAt": "2026-08-13T19:38:46+08:00"
     },
     "community": {
-      "repository": "https://github.com/topics/dsh-plugin",
-      "generatedAt": "2026-10-25T19:27:33.578Z",
-      "policy": "automated-pinned-source-contracts"
+      "repository": "https://github.com/dsh-pub/dsh-pub",
+      "generatedAt": "2026-10-26T04:41:58.000Z",
+      "policy": "pinned-source-contracts"
     }
   },
   "topics": [
@@ -284158,6 +284158,26 @@
       "repository": "https://github.com/zzzzyppp/dsh-skill-desc-zh",
       "directory": "",
       "commit": "4e332dee42fbce1caf060f41466c049e1a746d31"
+    },
+    {
+      "slug": "dsh-runtime-map",
+      "name": "dsh-runtime-map",
+      "description": {
+        "en": "Runtime Map：在 DeepSeek Harness 中汇集原生目录、可信状态与共享关系画布",
+        "zh": "Runtime Map：在 DeepSeek Harness 中汇集原生目录、可信状态与共享关系画布"
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/jueduihouqi-GG/dsh-runtime-map",
+      "directory": "",
+      "commit": "06195320e39a74477d64de1ef00995f0feb48035"
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
   "source": {
-    "repository": "https://github.com/topics/dsh-plugin",
-    "generatedAt": "2026-10-25T19:27:33.578Z",
-    "policy": "automated-pinned-source-contracts"
+    "repository": "https://github.com/dsh-pub/dsh-pub",
+    "generatedAt": "2026-10-26T04:41:58.000Z",
+    "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 35, "automated": 13554, "installable": 13595 },
+  "totals": { "reviewed": 6, "submitted": 36, "automated": 13554, "installable": 13596 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -989313,6 +989313,63 @@
         "limitations": {
           "en": "",
           "zh": "- 页面像素、真实认证、真实点击与真实文件写入尚未在运行中的 GUI 验收；本章的“通过”仅指源码、单测、真实模块探针与临时目录 e2e。\n- 只管理文本技能；不处理二进制资源，不提供批量导入/导出。\n- 禁用只在 agent 作用域生效，global 视角仍英文；这是宿主层级机制，不是页面 bug。\n- `link:` 源码升级后必须重启 DSH 才会加载 v0.6.0 的 client/server 两半。\n- 仓库没有 `.git`，回滚依赖快照/备份而非 `git revert`。\n- 真实 `~/.dsh` 的写操作未在本次验收中执行；首次使用请先在一个测试项目里试新建/删除/恢复。"
+        }
+      }
+    },
+    {
+      "id": "github:jueduihouqi-GG/dsh-runtime-map",
+      "slug": "dsh-runtime-map",
+      "name": "dsh-runtime-map",
+      "version": "0.5.0-rc.1",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-26",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/158",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "Runtime Map：在 DeepSeek Harness 中汇集原生目录、可信状态与共享关系画布",
+        "zh": "Runtime Map：在 DeepSeek Harness 中汇集原生目录、可信状态与共享关系画布"
+      },
+      "source": {
+        "repository": "https://github.com/jueduihouqi-GG/dsh-runtime-map",
+        "directory": "",
+        "commit": "06195320e39a74477d64de1ef00995f0feb48035"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": { "profiles": null, "defaultWeb": null, "bundles": ["dsh-runtime-map"] },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/jueduihouqi-GG/dsh-runtime-map/06195320e39a74477d64de1ef00995f0feb48035/README.md",
+          "zh": "https://raw.githubusercontent.com/jueduihouqi-GG/dsh-runtime-map/06195320e39a74477d64de1ef00995f0feb48035/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
         }
       }
     }
