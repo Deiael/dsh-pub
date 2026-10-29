@@ -184248,6 +184248,27 @@
           "zh": ""
         }
       }
+    },
+    {
+      "repository": "https://github.com/KB1SLN-Labs/dsh-ponytail",
+      "commit": "f155fb24439a8fba645e67af7c3c582144726df6",
+      "directory": "",
+      "packageName": "@kb1slnlabs/dsh-ponytail",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "index.js",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/kb1sln-labs--dsh-ponytail.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/164",
+        "submittedAt": "2026-10-29",
+        "category": "client-ui",
+        "description": {
+          "en": "Ponytail 5.3.3 lazy senior dev mode for DeepSeek Harness: always-on minimal-code ruleset, per-session intensity switching, and the six upstream review/audit/debt/gain/help skills",
+          "zh": ""
+        }
+      }
     }
   ]
 }

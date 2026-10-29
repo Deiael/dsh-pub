@@ -8,7 +8,7 @@
     },
     "community": {
       "repository": "https://github.com/dsh-pub/dsh-pub",
-      "generatedAt": "2026-10-29T07:22:24.000Z",
+      "generatedAt": "2026-10-29T20:05:01.000Z",
       "policy": "pinned-source-contracts"
     }
   },
@@ -303702,6 +303702,26 @@
       "repository": "https://github.com/sdiwenchen-lang/DeepSeek-Usage",
       "directory": "",
       "commit": "0cba805f94ff5509353c4bc678acff7197260a86"
+    },
+    {
+      "slug": "kb1sln-labs-kb1slnlabs-dsh-ponytail",
+      "name": "@kb1slnlabs/dsh-ponytail",
+      "description": {
+        "en": "Ponytail 5.3.3 lazy senior dev mode for DeepSeek Harness: always-on minimal-code ruleset, per-session intensity switching, and the six upstream review/audit/debt/gain/help skills",
+        "zh": "Ponytail 5.3.3 lazy senior dev mode for DeepSeek Harness: always-on minimal-code ruleset, per-session intensity switching, and the six upstream review/audit/debt/gain/help skills"
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/KB1SLN-Labs/dsh-ponytail",
+      "directory": "",
+      "commit": "f155fb24439a8fba645e67af7c3c582144726df6"
     }
   ]
 }
