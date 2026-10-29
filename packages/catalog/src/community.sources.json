@@ -184227,6 +184227,27 @@
       "readmePath": "README.md",
       "licensePath": "LICENSE",
       "automation": { "analyzedAt": "2026-10-29", "method": "automated-static-contract" }
+    },
+    {
+      "repository": "https://github.com/sdiwenchen-lang/DeepSeek-Usage",
+      "commit": "0cba805f94ff5509353c4bc678acff7197260a86",
+      "directory": "",
+      "packageName": "deepseek-usage",
+      "manifestPath": "package.json",
+      "bundlePatchPath": "cordis.patch.yml",
+      "runtimeEntryPath": "src/index.js",
+      "readmePath": "README.md",
+      "licensePath": "LICENSE",
+      "submission": {
+        "file": "https://github.com/dsh-pub/dsh-pub/blob/main/submissions/sdiwenchen-lang--deepseek-usage.json",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/162",
+        "submittedAt": "2026-10-29",
+        "category": "client-ui",
+        "description": {
+          "en": "DeepSeek 官方口径的账户余额与每日 Token 用量 —— DeepSeek Harness 插件：点侧边栏「用量」弹出居中的用量与余额面板，数据直接复用 DSH 里已登录的 DeepSeek 账号",
+          "zh": ""
+        }
+      }
     }
   ]
 }

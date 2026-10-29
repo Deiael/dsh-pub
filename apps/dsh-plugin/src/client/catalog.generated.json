@@ -7,9 +7,9 @@
       "generatedAt": "2026-08-13T19:38:46+08:00"
     },
     "community": {
-      "repository": "https://github.com/topics/dsh-plugin",
-      "generatedAt": "2026-10-28T21:31:14.760Z",
-      "policy": "automated-pinned-source-contracts"
+      "repository": "https://github.com/dsh-pub/dsh-pub",
+      "generatedAt": "2026-10-29T07:22:24.000Z",
+      "policy": "pinned-source-contracts"
     }
   },
   "topics": [
@@ -303682,6 +303682,26 @@
       "repository": "https://github.com/zz12hui/dsh-bili-video-summary",
       "directory": "",
       "commit": "bb1a505d7f3b7adb6119de4085e87db7dff44072"
+    },
+    {
+      "slug": "deepseek-usage",
+      "name": "deepseek-usage",
+      "description": {
+        "en": "DeepSeek 官方口径的账户余额与每日 Token 用量 —— DeepSeek Harness 插件：点侧边栏「用量」弹出居中的用量与余额面板，数据直接复用 DSH 里已登录的 DeepSeek 账号",
+        "zh": "DeepSeek 官方口径的账户余额与每日 Token 用量 —— DeepSeek Harness 插件：点侧边栏「用量」弹出居中的用量与余额面板，数据直接复用 DSH 里已登录的 DeepSeek 账号"
+      },
+      "topic": "ui-client",
+      "category": "client-ui",
+      "type": "bundle",
+      "provenance": "community",
+      "surfaces": [
+        "profile"
+      ],
+      "installable": true,
+      "capabilityCount": 0,
+      "repository": "https://github.com/sdiwenchen-lang/DeepSeek-Usage",
+      "directory": "",
+      "commit": "0cba805f94ff5509353c4bc678acff7197260a86"
     }
   ]
 }

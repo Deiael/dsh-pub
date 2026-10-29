@@ -1,10 +1,10 @@
 {
   "source": {
-    "repository": "https://github.com/topics/dsh-plugin",
-    "generatedAt": "2026-10-28T21:31:14.760Z",
-    "policy": "automated-pinned-source-contracts"
+    "repository": "https://github.com/dsh-pub/dsh-pub",
+    "generatedAt": "2026-10-29T07:22:24.000Z",
+    "policy": "pinned-source-contracts"
   },
-  "totals": { "reviewed": 6, "submitted": 36, "automated": 14493, "installable": 14535 },
+  "totals": { "reviewed": 6, "submitted": 37, "automated": 14493, "installable": 14536 },
   "entries": [
     {
       "id": "github:omdsh-dev/dsh-open-in-vscode",
@@ -1058690,6 +1058690,63 @@
         },
         "modelExperience": { "en": "", "zh": "" },
         "limitations": { "en": "", "zh": "" }
+      }
+    },
+    {
+      "id": "github:sdiwenchen-lang/DeepSeek-Usage",
+      "slug": "deepseek-usage",
+      "name": "deepseek-usage",
+      "version": "0.1.0",
+      "license": "MIT",
+      "type": "bundle",
+      "category": "client-ui",
+      "builtIn": false,
+      "provenance": {
+        "status": "community-submitted",
+        "submittedVia": "github-pull-request",
+        "submittedAt": "2026-10-29",
+        "pullRequest": "https://github.com/dsh-pub/dsh-pub/pull/162",
+        "statement": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "description": {
+        "en": "DeepSeek 官方口径的账户余额与每日 Token 用量 —— DeepSeek Harness 插件：点侧边栏「用量」弹出居中的用量与余额面板，数据直接复用 DSH 里已登录的 DeepSeek 账号",
+        "zh": "DeepSeek 官方口径的账户余额与每日 Token 用量 —— DeepSeek Harness 插件：点侧边栏「用量」弹出居中的用量与余额面板，数据直接复用 DSH 里已登录的 DeepSeek 账号"
+      },
+      "source": {
+        "repository": "https://github.com/sdiwenchen-lang/DeepSeek-Usage",
+        "directory": "",
+        "commit": "0cba805f94ff5509353c4bc678acff7197260a86"
+      },
+      "runtime": { "hostLoadable": null, "configurable": null, "client": null },
+      "capabilities": { "tools": null, "uiContributions": null, "uiSlotsDeclared": null },
+      "availability": { "profiles": null, "defaultWeb": null, "bundles": ["deepseek-usage"] },
+      "distribution": {
+        "installable": true,
+        "mode": "git-bundle",
+        "activation": "profile-layer",
+        "note": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
+      },
+      "docs": {
+        "readmePath": "README.md",
+        "readmeZhPath": "README.md",
+        "readme": {
+          "en": "https://raw.githubusercontent.com/sdiwenchen-lang/DeepSeek-Usage/0cba805f94ff5509353c4bc678acff7197260a86/README.md",
+          "zh": "https://raw.githubusercontent.com/sdiwenchen-lang/DeepSeek-Usage/0cba805f94ff5509353c4bc678acff7197260a86/README.md"
+        },
+        "modelExperience": {
+          "en": "Not inspected by the automated submission check; inspect the pinned source for model-facing behavior.",
+          "zh": "自动提交检查未核对模型侧行为；请查看固定版本的源码。"
+        },
+        "limitations": {
+          "en": "Submitted through a public pull request. Automated checks verified the public bundle contract and committed files, but did not inspect runtime capabilities. This is not a human review, security audit, publisher identity check, or official endorsement.",
+          "zh": "通过公开 Pull Request 提交。自动检查验证了公开组合包契约与已提交文件，但未核对运行时能力；这不等于人工审核、安全审计、发布者身份验证或官方背书。"
+        }
       }
     }
   ]
